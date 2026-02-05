@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des evenements
+{% endblock %}
+
+{% block body %}
+	<h1>Mes evenements</h1>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">Titre</th>
+				<th scope="col">Description</th>
+				<th scope="col">Date début</th>
+				<th scope="col">Date fin</th>
+				<th scope="col">Lieu</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for event in events %}
+				<tr class="table-active">
+					<th scope="row">{{ event.titre }}</th>
+					<td>{{ event.description }}</td>
+					<td>{{ event.datedebut|date("m/d/Y", "Europe/Paris") }}</td>
+					<td>{{ event.datefin|date("m/d/Y", "Europe/Paris")  }}</td>
+					<td>{{ event.lieu }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}
