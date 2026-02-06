@@ -13,6 +13,7 @@
 				<th scope="col">Date début</th>
 				<th scope="col">Date fin</th>
 				<th scope="col">Lieu</th>
+				<th scope="col">Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -23,6 +24,10 @@
 					<td>{{ event.datedebut|date("m/d/Y", "Europe/Paris") }}</td>
 					<td>{{ event.datefin|date("m/d/Y", "Europe/Paris")  }}</td>
 					<td>{{ event.lieu }}</td>
+					<td>
+                        <a href="{{ path('affiche_event', {'id':event.id}) }}">Afficher</a>
+                        <a href="{{ path('edit_event', {'id':event.id}) }}">Editer</a>
+                    </td>
 				</tr>
 			{% endfor %}
 		</tbody>

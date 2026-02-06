@@ -43,4 +43,33 @@ final class EvenementController extends AbstractController
             'formevent' => $form
         ]);
     }
+
+    #[Route('/evenement/edit/{id}', 'edit_event')]
+    public function edit(Request $request, EntityManagerInterface $em, Evenement $evenement)
+    {
+        $form = $this->createForm(EvenementType::class, $evenement);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $evenement->setCreatedAt(new DateTimeImmutable());
+            $em->persist($evenement);
+            $em->flush();
+            return $this->redirectToRoute('app_evenement');
+        }
+
+        return $this->render('evenement/edit.html.twig', [
+            'formevent' => $form
+        ]);
+    }
+
+    #[Route('/evenement/del/{id}', 'affiche_event')]
+    public function delete(Evenement $event) {
+        
+    }
+    
+    #[Route('/evenement/{id}', 'affiche_event')]
+    public function show(Evenement $event) {
+        return $this->render('evenement/show.html.twig', [
+            'event' => $event
+        ]);
+    }
 }
