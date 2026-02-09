@@ -44,7 +44,7 @@ final class EvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/evenement/edit/{id}', 'edit_event')]
+    #[Route('/evenement/{id}/edit', 'edit_event')]
     public function edit(Request $request, EntityManagerInterface $em, Evenement $evenement)
     {
         $form = $this->createForm(EvenementType::class, $evenement);
@@ -61,9 +61,12 @@ final class EvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/evenement/del/{id}', 'affiche_event')]
-    public function delete(Evenement $event) {
-        
+    #[Route('/evenement/{id}/del', 'del_event')]
+    public function delete(Request $request, EntityManagerInterface $em, Evenement $event) {
+        $em->remove($event);
+        $em->flush();
+
+        return $this->redirectToRoute('app_evenement');
     }
     
     #[Route('/evenement/{id}', 'affiche_event')]

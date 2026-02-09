@@ -25,9 +25,11 @@
 					<td>{{ event.datefin|date("m/d/Y", "Europe/Paris")  }}</td>
 					<td>{{ event.lieu }}</td>
 					<td>
-                        <a href="{{ path('affiche_event', {'id':event.id}) }}">Afficher</a>
-                        <a href="{{ path('edit_event', {'id':event.id}) }}">Editer</a>
-                    </td>
+						<a href="{{ path('affiche_event', {'id':event.id}) }}" class="btn btn-primary btn-sm">Afficher</a>
+						<a href="{{ path('edit_event', {'id':event.id}) }}" class="btn btn-secondary btn-sm">Editer</a>
+						<a href="{{ path('del_event', {'id':event.id}) }}" class="btn btn-warning btn-sm"
+							onclick="return(confirm('Confirmation de la suppression ?'));">Supprimer</a>
+					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
