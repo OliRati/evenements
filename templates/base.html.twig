@@ -51,13 +51,13 @@
 										<img style="width: 3rem;" src="{{ asset('uploads/avatars/' ~ app.user.avatar) }}" alt="Avatar" class="avatar">
 									{% endif %}
 								{% else %}
-									Dropdown
+									Account
 								{% endif %}
 							</a>
 							<div class="dropdown-menu">
 								{% if is_granted("IS_AUTHENTICATED_FULLY") %}
 									<a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
-									<a class="dropdown-item" href="#">Profil</a>
+									<a class="dropdown-item" href="{{ path('app_profil') }}">Profil</a>
 								{% else %}
 									<a class="dropdown-item" href="{{ path('app_login') }}">Login</a>
 									<a class="dropdown-item" href="{{ path('app_register') }}">Register</a>

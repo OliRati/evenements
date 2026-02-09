@@ -38,6 +38,7 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/evenement/new, roles: ROLE_USER }
+        - { path: ^/profil, roles: ROLE_USER }
         - { path: ^/evenement/\d+/, roles: ROLE_USER }
 
 when@test:
