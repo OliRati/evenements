@@ -26,13 +26,18 @@
 					<td>{{ event.lieu }}</td>
 					<td>
 						<a href="{{ path('affiche_event', {'id':event.id}) }}" class="btn btn-primary btn-sm">Afficher</a>
-						<a href="{{ path('edit_event', {'id':event.id}) }}" class="btn btn-secondary btn-sm">Editer</a>
-						<a href="{{ path('del_event', {'id':event.id}) }}" class="btn btn-warning btn-sm"
-							onclick="return(confirm('Confirmation de la suppression ?'));">Supprimer</a>
+						{% if is_granted("ROLE_USER") %}
+							<a href="{{ path('edit_event', {'id':event.id}) }}" class="btn btn-secondary btn-sm">Editer</a>
+							<a href="{{ path('del_event', {'id':event.id}) }}" class="btn btn-warning btn-sm" onclick="return(confirm('Confirmation de la suppression ?'));">Supprimer</a>
+						{% endif %}
 					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
+
+	<a class="btn btn-primary" href="{{ path('new_event') }}">
+		Ajouter un evenement
+	</a>
 
 {% endblock %}
