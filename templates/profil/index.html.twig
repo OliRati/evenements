@@ -8,15 +8,21 @@
 	<h1>Mon profil</h1>
 
 	{% if is_granted("IS_AUTHENTICATED_FULLY") %}
-    <div class="profil">
-		{% if app.user.avatar %}
-			<img style="width: 8rem;" src="{{ asset('uploads/avatars/' ~ app.user.avatar) }}" alt="Avatar" class="avatar">
-		{% endif %}
+		<div class="profil">
+			{% if user.avatar %}
+				<img style="width: 8rem;" src="{{ asset('uploads/avatars/' ~ user.avatar) }}" alt="Avatar" class="avatar">
+			{% endif %}
 
-        <p>Nom : {{ app.user.nom }}</p>
-        <p>Prénom : {{ app.user.prenom }}</p>
-        <p>Email : {{ app.user.email }}</p>
-            </div>
+			<p><span>Nom :</span>
+				{{ user.nom }}</p>
+			<p><span>Prénom :</span>
+				{{ user.prenom }}</p>
+			<p><span>Email :</span>
+				{{ user.email }}</p>
+			<a class="btn btn-primary" href="{{ path('edit_profil') }}">Modifier mon profil</a>
+			<a class="btn btn-secondary" href="{{ path('delete_profil') }}">Supptimer mon profil</a>
+		</div>
+
 	{% endif %}
 
 {% endblock %}
