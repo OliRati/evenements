@@ -29,7 +29,7 @@ final class CategorieController extends AbstractController
     {
         $categorie = new Categorie();
 
-        $form = $this->createForm( CategorieType::class, $categorie);
+        $form = $this->createForm(CategorieType::class, $categorie);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $categorie->setCreatedAt(new DateTimeImmutable());
@@ -43,7 +43,7 @@ final class CategorieController extends AbstractController
         ]);
     }
 
-     #[Route('/categorie/{id}/edit', 'edit_categorie')]
+    #[Route('/categorie/{id}/edit', 'edit_categorie')]
     public function edit(Request $request, EntityManagerInterface $em, Categorie $categorie)
     {
         $form = $this->createForm(CategorieType::class, $categorie);
@@ -58,5 +58,13 @@ final class CategorieController extends AbstractController
         return $this->render('categorie/edit.html.twig', [
             'form' => $form
         ]);
+    }
+
+    #[Route('/categorie/{id}/delete', 'del_categorie')]
+    public function delete(Request $request, EntityManagerInterface $em, Categorie $categorie)
+    {
+        $em->remove($categorie);
+        $em->flush();
+        return $this->redirectToRoute('app_categorie');
     }
 }

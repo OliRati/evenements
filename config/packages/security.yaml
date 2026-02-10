@@ -40,6 +40,8 @@ security:
         - { path: ^/evenement/new, roles: ROLE_USER }
         - { path: ^/profil, roles: ROLE_USER }
         - { path: ^/evenement/\d+/, roles: ROLE_USER }
+        - { path: ^/categorie/new, roles: ROLE_USER }
+        - { path: ^/categorie/\d+/, roles: ROLE_USER }
 
 when@test:
     security:

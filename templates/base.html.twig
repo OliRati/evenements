@@ -1,77 +1,82 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>
-			{% block title %}Welcome!
-			{% endblock %}
-		</title>
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-		<link rel="stylesheet" href="https://bootswatch.com/5/solar/bootstrap.min.css">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-		{% block stylesheets %}{% endblock %}
 
-		{% block javascripts %}
-			{% block importmap %}
-				{{ importmap('app') }}
-			{% endblock %}
+<head>
+	<meta charset="UTF-8">
+	<title>
+		{% block title %}Welcome!
 		{% endblock %}
-	</head>
-	<body>
-		<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="{{ path('app_home') }}">Acceuil</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarColor02">
-					<ul class="navbar-nav me-auto">
-						<li class="nav-item">
-							<a class="nav-link active" href="{{ path('new_event') }}">Ajouter
-								<span class="visually-hidden">(current)</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="{{ path('app_evenement') }}">Afficher</a>
-						</li>
-						<li class="nav-item">
+	</title>
+	<link rel="icon"
+		href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+		integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://bootswatch.com/5/solar/bootstrap.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+	{% block stylesheets %}{% endblock %}
+
+	{% block javascripts %}
+	{% block importmap %}
+	{{ importmap('app') }}
+	{% endblock %}
+	{% endblock %}
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="{{ path('app_home') }}">Acceuil</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+				aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarColor02">
+				<ul class="navbar-nav me-auto d-flex align-items-center">
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path('new_event') }}">Ajouter
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('app_evenement') }}">Evenements</a>
+					</li>
+					<li class="nav-item">
+						<a class="dropdown-item" href="{{ path('app_categorie') }}">Catégories</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+							aria-haspopup="true" aria-expanded="false">
 							{% if is_granted("IS_AUTHENTICATED_FULLY") %}
-								<a class="nav-link" href="{{ path('app_logout') }}">deconnexion</a>
-							{% else %}
-								<a class="nav-link" href="{{ path('app_register') }}">inscription/connexion</a>
+							{% if app.user.avatar %}
+							<img style="width: 3rem;" src="{{ asset('uploads/avatars/' ~ app.user.avatar) }}"
+								alt="Avatar" class="avatar">
 							{% endif %}
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-								{% if is_granted("IS_AUTHENTICATED_FULLY") %}
-									{% if app.user.avatar %}
-										<img style="width: 3rem;" src="{{ asset('uploads/avatars/' ~ app.user.avatar) }}" alt="Avatar" class="avatar">
-									{% endif %}
-								{% else %}
-									<i class="fa-solid fa-user"></i>
-								{% endif %}
-							</a>
-							<div class="dropdown-menu">
-								{% if is_granted("IS_AUTHENTICATED_FULLY") %}
-									<a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
-									<a class="dropdown-item" href="{{ path('app_profil') }}">Profil</a>
-									<a class="dropdown-item" href="{{ path('app_evenement') }}">Mes evenements</a>
-									<a class="dropdown-item" href="{{ path('app_categorie') }}">Catégories</a>
-									<a class="dropdown-item" href="#">Administrateur</a>
-								{% else %}
-									<a class="dropdown-item" href="{{ path('app_login') }}">Login</a>
-									<a class="dropdown-item" href="{{ path('app_register') }}">Register</a>
-								{% endif %}
-							</div>
-						</li>
+							{% else %}
+							<i class="fa-solid fa-user"></i>
+							{% endif %}
+						</a>
+						<div class="dropdown-menu">
+							{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+							<a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
+							<a class="dropdown-item" href="{{ path('app_profil') }}">Profil</a>
+							<a class="dropdown-item" href="#">Administrateur</a>
+							{% else %}
+							<a class="dropdown-item" href="{{ path('app_login') }}">Login</a>
+							<a class="dropdown-item" href="{{ path('app_register') }}">Inscription</a>
+							{% endif %}
+						</div>
+					</li>
 
-					</ul>
-				</div>
+				</ul>
 			</div>
-		</nav>
+		</div>
+	</nav>
 
-		{% block body %}{% endblock %}
-	</body>
+	{% block body %}{% endblock %}
+</body>
+
 </html>
