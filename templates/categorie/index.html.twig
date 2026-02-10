@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategorieController!{% endblock %}
+
+{% block body %}
+<h1>Liste de categories</h1>
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">Nom</th>
+				<th scope="col">Date de création</th>
+				<th scope="col">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for categorie in categories %}
+				<tr class="table-active">
+					<th scope="row">{{ categorie.nom }}</th>
+					<td>{{ categorie.createdAt|date("m/d/Y", "Europe/Paris") }}</td>
+					<td>
+						{% if is_granted("ROLE_USER") %}
+							<a href="{{ path('edit_categorie', {'id':categorie.id}) }}" class="btn btn-secondary btn-sm">Editer</a>
+                            <a href="{{ path('eventbycat', {'id': categorie.id}) }}" class="btn btn-secondary btn-sm">Evenements</a>
+{#							<a href="{{ path('del_categorie', {'id':categorie.id}) }}" class="btn btn-warning btn-sm" onclick="return(confirm('Confirmation de la suppression ?'));">Supprimer</a> #}
+						{% endif %}
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+    <a class="btn btn-primary" href="{{ path('new_categorie') }}">Ajouter une catégorie</a>
+{% endblock %}

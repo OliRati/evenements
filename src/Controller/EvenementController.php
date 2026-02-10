@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categorie;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
@@ -73,6 +74,14 @@ final class EvenementController extends AbstractController
     public function show(Evenement $event) {
         return $this->render('evenement/show.html.twig', [
             'event' => $event
+        ]);
+    }
+
+    #[Route('evenement/categorie/{id}', name: 'eventbycat')]
+    public function eventbycategory(EvenementRepository $eventrepo, Categorie $cat) {
+        $eventbycat = $eventrepo->findEventByCategory($cat->getId());
+        return $this->render('evenement/index.html.twig', [
+            'events' => $eventbycat
         ]);
     }
 }
